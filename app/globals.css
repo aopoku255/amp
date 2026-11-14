@@ -7,9 +7,13 @@
   --color-line: #dcd6cb;
   --color-accent: #9a7442;
   --color-accent-soft: #c9a56f;
+  --color-night: #0a0a0b;
+  --color-panel: #141416;
+  --color-live: #ff3b30;
 
   --font-display: var(--font-instrument-serif), "Times New Roman", serif;
   --font-sans: var(--font-inter-tight), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
 html {

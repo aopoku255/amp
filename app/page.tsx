@@ -1,85 +1,64 @@
-import EventCaption from "@/components/EventCaption";
-import EventMedia from "@/components/EventMedia";
-import SiteFooter from "@/components/SiteFooter";
-import SiteHeader from "@/components/SiteHeader";
+import Link from "next/link";
+import StreamDeck from "@/components/StreamDeck";
 import { events } from "@/data/events";
 
-/**
- * Editorial placements for the venue grid (desktop: 12 columns).
- * Order matches `events` in data/events.ts; the last event gets the featured treatment.
- */
-const placements = [
-  { wrap: "lg:col-span-7", aspect: "aspect-[4/3] lg:aspect-[7/6]", sizes: "(min-width: 1024px) 58vw, 100vw" },
-  { wrap: "lg:col-span-5 lg:mt-48", aspect: "aspect-[4/3] lg:aspect-[4/5]", sizes: "(min-width: 1024px) 42vw, 100vw" },
-  { wrap: "lg:col-span-8 lg:col-start-3 lg:mt-16", aspect: "aspect-[4/3] lg:aspect-[16/9]", sizes: "(min-width: 1024px) 66vw, 100vw" },
-];
-
 export default function Home() {
-  const venues = events.slice(0, -1);
-  const featured = events[events.length - 1];
-
   return (
-    <div id="top">
-      <SiteHeader />
+    <div className="flex min-h-dvh flex-col bg-night text-white">
+      <header className="mx-auto flex w-full max-w-[1400px] items-center justify-between px-5 py-5 sm:px-10">
+        {/* Logo placeholder: swap for <Image src="/images/amp-ace-logo.svg" … /> */}
+        <a href="/" aria-label="AMP ACE Multimedia home" className="flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+          <span aria-hidden="true" className="flex size-9 items-center justify-center bg-white font-display text-lg text-night">
+            A
+          </span>
+          <span className="text-[13px] tracking-[0.2em] sm:text-sm sm:tracking-[0.25em]">
+            <span className="font-semibold">AMP ACE</span> <span className="text-white/50">MULTIMEDIA</span>
+          </span>
+        </a>
+        <span className="hidden items-center gap-2 rounded-full border border-white/15 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/70 sm:flex">
+          <span aria-hidden="true" className="relative flex size-1.5">
+            <span className="absolute inset-0 animate-ping rounded-full bg-live opacity-70 motion-reduce:hidden" />
+            <span className="relative size-1.5 rounded-full bg-live" />
+          </span>
+          Live Event Streaming
+        </span>
+      </header>
 
-      <main>
-        {/* Introduction */}
-        <section className="mx-auto max-w-[1400px] px-5 pb-20 pt-16 sm:px-10 sm:pb-28 sm:pt-24 lg:pt-32">
-          <p className="text-xs font-medium uppercase tracking-[0.25em] text-accent">Selected Events &amp; Venues</p>
-          <h1 className="mt-6 max-w-5xl font-display text-[clamp(2.75rem,8vw,7rem)] leading-[0.95] tracking-tight">
-            Creating Experiences.
-            <br />
-            <span className="italic text-muted">Connecting People.</span>
+      <main className="mx-auto w-full max-w-[1400px] flex-1 px-5 pb-12 sm:px-10">
+        <div className="grid grid-cols-1 gap-6 pb-8 pt-8 sm:pt-12 lg:grid-cols-12 lg:items-end lg:pb-10 lg:pt-14">
+          <h1 className="text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.035em] lg:col-span-8">
+            Your event,{" "}
+            <span className="font-display font-normal italic tracking-[-0.01em] text-white/90">live</span> to the
+            world.
           </h1>
-          <p className="mt-10 max-w-xl text-base leading-relaxed text-muted sm:text-lg lg:ml-[calc(50%+1rem)] lg:mt-14">
-            From distinguished hotels to leading academic institutions, explore some of the venues where we have
-            brought people together through impactful conferences, workshops, and events.
+          <p className="max-w-md text-[15px] leading-relaxed text-white/55 lg:col-span-4">
+            Conferences, workshops and corporate events, streamed live from distinguished venues across Ghana and
+            Nigeria. Select a channel to watch.
           </p>
-        </section>
+        </div>
 
-        {/* Venue grid */}
-        <section id="events" aria-label="Our events" className="mx-auto max-w-[1400px] scroll-mt-8 px-5 sm:px-10">
-          <ul className="grid grid-cols-1 gap-x-10 gap-y-20 sm:gap-y-28 lg:grid-cols-12 lg:gap-x-16">
-            {venues.map((event, i) => {
-              const p = placements[i % placements.length];
-              return (
-                <li key={event.id} className={p.wrap}>
-                  <article>
-                    <EventMedia event={event} aspect={p.aspect} sizes={p.sizes} priority={i === 0} />
-                    <div className="mt-8">
-                      <EventCaption event={event} />
-                    </div>
-                  </article>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-
-        {/* Featured: Cedi Conference */}
-        {featured && (
-          <section aria-label={featured.title} className="mt-28 bg-ink text-paper sm:mt-40">
-            <article className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-12 px-5 py-20 sm:px-10 sm:py-28 lg:grid-cols-12 lg:gap-16 lg:py-36">
-              <div className="lg:col-span-5 lg:col-start-1">
-                <EventMedia
-                  event={featured}
-                  aspect="aspect-[4/5]"
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  className="focus-visible:ring-offset-ink"
-                />
-              </div>
-              <div className="lg:col-span-6 lg:col-start-7">
-                <p className="mb-10 text-xs font-medium uppercase tracking-[0.25em] text-accent-soft">
-                  Academic Conference
-                </p>
-                <EventCaption event={featured} tone="dark" large />
-              </div>
-            </article>
-          </section>
-        )}
+        <StreamDeck events={events} />
       </main>
 
-      <SiteFooter />
+      <footer className="mx-auto flex w-full max-w-[1400px] flex-col gap-3 border-t border-white/10 px-5 py-6 font-mono text-[10px] uppercase tracking-[0.14em] text-white/40 sm:flex-row sm:items-center sm:justify-between sm:px-10">
+        <span>© {new Date().getFullYear()} AMP ACE Multimedia</span>
+        <span className="normal-case tracking-normal text-white/30">
+          Channel photos via Wikimedia Commons:{" "}
+          {events
+            .filter((e) => e.credit)
+            .map((e, i, arr) => (
+              <span key={e.id}>
+                <a href={e.credit!.source} target="_blank" rel="noopener noreferrer" className="hover:text-white/70">
+                  {e.credit!.author}
+                </a>{" "}
+                ({e.credit!.license}){i < arr.length - 1 ? ", " : ""}
+              </span>
+            ))}
+        </span>
+        <Link href="/venues" className="transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none">
+          Venue gallery →
+        </Link>
+      </footer>
     </div>
   );
 }

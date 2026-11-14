@@ -104,3 +104,17 @@ export const events: EventItem[] = [
     },
   },
 ];
+
+/** Extracts the video ID from youtube.com/live/ID, /watch?v=ID, youtu.be/ID or /embed/ID links. */
+export function youtubeId(url: string): string | null {
+  try {
+    const u = new URL(url);
+    if (u.hostname === "youtu.be") return u.pathname.slice(1) || null;
+    const v = u.searchParams.get("v");
+    if (v) return v;
+    const m = u.pathname.match(/^\/(?:live|embed|shorts)\/([\w-]{6,})/);
+    return m ? m[1] : null;
+  } catch {
+    return null;
+  }
+}

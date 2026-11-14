@@ -1,6 +1,11 @@
 # AMP ACE Multimedia Events Showcase
 
-A single-page visual portfolio of AMP ACE Multimedia events, built with Next.js and Tailwind CSS.
+A live-event streaming landing page for AMP ACE Multimedia, built with Next.js and Tailwind CSS.
+
+- `/`: streaming landing page with a program monitor (embedded YouTube player) and a channel switcher.
+- `/venues`: the earlier editorial venue gallery.
+
+**YouTube videos must be Public or Unlisted.** Private videos cannot be played by visitors, either embedded or on YouTube.
 
 ## Run
 

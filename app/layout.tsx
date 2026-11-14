@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter_Tight } from "next/font/google";
+import { Instrument_Serif, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const display = Instrument_Serif({
@@ -16,16 +16,22 @@ const sans = Inter_Tight({
   display: "swap",
 });
 
-const title = "AMP ACE Multimedia | Events, Conferences & Venues";
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
+
+const title = "AMP ACE Multimedia | Live Event Streaming";
 const description =
-  "A visual portfolio of conferences, workshops and events organized by AMP ACE Multimedia at distinguished venues across Ghana and Nigeria.";
+  "Conferences, workshops and corporate events streamed live by AMP ACE Multimedia from venues across Ghana and Nigeria.";
 
 export const metadata: Metadata = {
   // Set NEXT_PUBLIC_SITE_URL to the live domain so social preview images resolve.
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title,
   description,
-  keywords: ["AMP ACE Multimedia", "AMP ACE", "conferences", "events", "Accra", "Lagos", "event management", "workshops"],
+  keywords: ["AMP ACE Multimedia", "AMP ACE", "conferences", "events", "Accra", "Lagos", "live streaming", "event streaming", "event management", "workshops"],
   openGraph: {
     title,
     description,
@@ -37,12 +43,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f4f1eb",
+  themeColor: "#0a0a0b",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`}>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <body className="bg-paper font-sans text-ink antialiased">{children}</body>
     </html>
   );
